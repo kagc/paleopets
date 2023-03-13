@@ -12,5 +12,10 @@ class Pet(db.Model):
     ownerId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     name = db.Column(db.String(40), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now())
+    petType = db.Column(db.String(255), nullable=False)
+    growth = db.Column(db.DECIMAL(50,2), nullable=False)
+    hunger = db.Column(db.DECIMAL(50,2), nullable=False)
+    description = db.Column(db.String(4000))
+    img = db.Column(db.String(1000), nullable=False)
     
     owner = db.relationship("User", back_populates="pets")
