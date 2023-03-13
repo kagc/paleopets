@@ -14,7 +14,7 @@ class Pet(db.Model):
     petTypeId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("petTypes.id")), nullable=False)
     name = db.Column(db.String(40), nullable=False, unique=True)
     created_at = db.Column(db.DateTime, default=datetime.now())
-    # growth = db.Column(db.DECIMAL(50,2), nullable=False)
+    currGrowth = db.Column(db.DECIMAL(50,2), nullable=False)
     hunger = db.Column(db.DECIMAL(50,2), nullable=False)
     description = db.Column(db.String(4000))
     # img = db.Column(db.String(1000), nullable=False)
