@@ -23,11 +23,14 @@ class Pet(db.Model):
     petType = db.relationship("PetType", back_populates="pets")
     
     def to_dict_pet(self):
-        'id': self.id
-        'name': self.name
-        'created_at': self.created_at
-        'hunger': self.hunger
-        'description': self.description
-        'owner': User.query.get(self.ownerId).to_dict()
-        'petDetails': PetType.query.get(self.petTypeId).to_dict_petType()
+        return {
+            'id': self.id,
+            'name': self.name,
+            'created_at': self.created_at,
+            'hunger': self.hunger,
+            'description': self.description,
+            'owner': User.query.get(self.ownerId).to_dict(),
+            'petDetails': PetType.query.get(self.petTypeId).to_dict_petType()
+        }
+        
         
