@@ -17,10 +17,13 @@ class PetType(db.Model):
     pets = db.relationship("Pet", back_populates="petType", cascade="all, delete")
     
     def to_dict_petType(self):
-        'id': self.id
-        'pet': self.pet
-        'color': self.color
-        'maxGrowth': self.maxGrowth
-        'mainImg': self.mainImg
-        'sadImg': self.sadImg
-        'madImg': self.madImg
+        return {
+            'id': self.id,
+            'pet': self.pet,
+            'color': self.color,
+            'maxGrowth': self.maxGrowth,
+            'mainImg': self.mainImg,
+            'sadImg': self.sadImg,
+            'madImg': self.madImg
+        }
+        
