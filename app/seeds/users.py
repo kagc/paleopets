@@ -4,6 +4,9 @@ from sqlalchemy.sql import text
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
+    adoption_center = User(
+        username='AdoptionCenter'
+    )
     demo = User(
         username='Demo', email='demo@aa.io', password='password', dob='12/12/2000')
     marnie = User(
