@@ -1,3 +1,4 @@
+from math import log
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.forms import PetForm
@@ -43,3 +44,37 @@ def create_pet():
     }, 400
 
 # update pet - abandon
+@pet_routes.route('/<int:id>/shelter', methods=['PUT'])
+@login_required
+def abandon_pet(id):
+    form = PetForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    
+    pet = Pet.query.get(id)
+    
+    if not pet:
+        return {
+            'message': 'Error',
+            'errors': ['Pet couldn`t be found'],
+            'statusCode': 404,
+        }, 404
+        
+    currentId = current_user.get_id()
+    if int(pet.ownerId) != int(currentId):
+        return {
+            'message': 'Forbidden',
+            'errors': ['This pet does not belong to the current user.'],
+            'statusCode': 403
+        }, 403
+        
+    if form.validate_on_submit():
+        form.populate_obj(pet)
+        db.session.add(pet)
+        db.session.commit()
+        return pet.to_dict_project()
+    
+    return {
+        'message': 'Validation Error',
+        'errors': validation_errors_to_error_messages(form.errors),
+        'statusCode': 400
+    }, 400
