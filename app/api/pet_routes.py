@@ -78,3 +78,11 @@ def abandon_pet(id):
         'errors': validation_errors_to_error_messages(form.errors),
         'statusCode': 400
     }, 400
+    
+# adopt pet
+# if owner id is the pet shelter, then can update ownerId to current user
+
+#feed pet '/feed/<int:id>'
+#edit to += to hunger total
+
+#edit pet description - rich text editor
