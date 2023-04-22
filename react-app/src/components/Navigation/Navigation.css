@@ -5,3 +5,21 @@
 .hidden {
   display: none;
 }
+
+.navbar {
+  background-color: rgb(255, 217, 0);
+  margin-bottom: 0px;
+}
+
+.home-link {
+  font-size: 3rem;
+  font-weight: 900;
+  color: white;
+  
+}
+
+.fa-solid {
+  -webkit-text-stroke: 2px black;
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
+}

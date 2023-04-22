@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify
 from flask_login import login_required
 from app.models import PetType
 
-petType_routes = Blueprint(('petTypes', __name__))
+petType_routes = Blueprint('petTypes', __name__)
 
 # get all pet types
 @petType_routes.route('/')
@@ -14,6 +14,6 @@ def petTypes():
 #  get one pet type
 @petType_routes.route('/<int:id>')
 @login_required
-def petTypes(id):
+def petType(id):
     petType = PetType.query.get(id)
     return petType.to_dict_petType()
