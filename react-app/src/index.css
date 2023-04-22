@@ -4,6 +4,7 @@ html,
 body {
   height: 100%;
   /* display: flex; */
+  font-family: 'Open-Dyslexic', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
 
 #green {
