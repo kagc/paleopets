@@ -6,6 +6,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import Home from "./components/Home";
+import Sidebar from "./components/Navigation/Sidebar";
 
 function App() {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
+      <Sidebar />
       {isLoaded && (
         <Switch>
           <Route path='/'>

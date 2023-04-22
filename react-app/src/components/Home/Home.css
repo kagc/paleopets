@@ -1,0 +1,9 @@
+.main-div {
+    display: flex;
+    border: solid red 1px;
+    /* flex-direction: row; */
+    margin-left: 20rem;
+    margin-top: 2rem;
+    margin-right: 2rem;
+    padding: 1rem;
+}

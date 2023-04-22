@@ -1,1 +1,15 @@
 /* TODO Add site wide styles */
+
+html,
+body {
+  height: 100%;
+  /* display: flex; */
+}
+
+#green {
+  height: 100%;
+  background: rgb(255, 217, 0);
+  text-align: center;
+  color: black;
+  position: absolute;
+}
