@@ -27,6 +27,7 @@ def create_pet():
     
     form['csrf_token'].data = request.cookies['csrf_token']
     
+    # !!! TODO- if user pets.length === 4, CANNOT create pet
     currentId = current_user.get_id()
     
     if form.validate_on_submit():
@@ -50,6 +51,7 @@ def abandon_pet(id):
     form = PetForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     
+    # !!! TODO if user has no pets, CANNOT abandon anything, maybe if only 1 pet can't abandon?
     pet = Pet.query.get(id)
     
     if not pet:
@@ -97,7 +99,9 @@ def adopt_pet(id):
             'errors': ['Pet couldn`t be found'],
             'statusCode': 404,
         }, 404
-        
+    
+    # !!! TODO- if user pets.length === 4, 
+                
     currentId = current_user.get_id()
     if int(pet.ownerId) != None:
         return {
@@ -119,6 +123,10 @@ def adopt_pet(id):
         'errors': validation_errors_to_error_messages(form.errors),
         'statusCode': 400
     }, 400
+
+# adventure? instead of over time hunger reduction
+# each move reduces overall gauge, cannot continue if 0, must feed
+# !!! need to set a main pet on the user, so user MUST have at least 1 pet or cannot access
 
 #feed pet '/feed/<int:id>'
 #edit to += to hunger total
