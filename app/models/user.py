@@ -17,6 +17,8 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     
     pets = db.relationship("Pet", back_populates='owner', cascade='all, delete')
+    
+    # !!! main_pet - db.relationship with Pet? create relationship on pet model? ** on creation, if user has no other pets, set main_pet value to True, all 3 other pets = False
 
     @property
     def password(self):
@@ -34,4 +36,9 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email
+        }
+        
+    def to_dict_users_pets(self):
+        return {
+            'pets': self.pets,
         }
