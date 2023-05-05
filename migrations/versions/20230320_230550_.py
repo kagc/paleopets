@@ -34,7 +34,7 @@ def upgrade():
     sa.Column('petTypeId', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=40), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.Column('currGrowth', sa.DECIMAL(precision=50, scale=2), nullable=False),
+    # sa.Column('currGrowth', sa.DECIMAL(precision=50, scale=2), nullable=False),
     sa.Column('hunger', sa.DECIMAL(precision=50, scale=2), nullable=False),
     sa.Column('description', sa.String(length=4000), nullable=True),
     sa.ForeignKeyConstraint(['ownerId'], ['users.id'], ),

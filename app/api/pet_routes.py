@@ -68,7 +68,9 @@ def abandon_pet(id):
         }, 403
         
     if form.validate_on_submit():
+        pet.ownerId = None #none instead of 1?
         form.populate_obj(pet)
+        # will need to change owner ID to 1 for paleopet 
         db.session.add(pet)
         db.session.commit()
         return pet.to_dict_project()
@@ -81,6 +83,42 @@ def abandon_pet(id):
     
 # adopt pet
 # if owner id is the pet shelter, then can update ownerId to current user
+@pet_routes.route('/<int:id>/adopt', methods=['PUT'])
+@login_required
+def adopt_pet(id):
+    form = PetForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    
+    pet = Pet.query.get(id)
+    
+    if not pet:
+        return {
+            'message': 'Error',
+            'errors': ['Pet couldn`t be found'],
+            'statusCode': 404,
+        }, 404
+        
+    currentId = current_user.get_id()
+    if int(pet.ownerId) != None:
+        return {
+            'message': 'Forbidden',
+            'errors': ['This pet is not up for adoption.'],
+            'statusCode': 403
+        }, 403
+        
+    if form.validate_on_submit():
+        pet.ownerId = currentId
+        form.populate_obj(pet)
+        # change pet owner from
+        db.session.add(pet)
+        db.session.commit()
+        return pet.to_dict_project()
+    
+    return {
+        'message': 'Validation Error',
+        'errors': validation_errors_to_error_messages(form.errors),
+        'statusCode': 400
+    }, 400
 
 #feed pet '/feed/<int:id>'
 #edit to += to hunger total

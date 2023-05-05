@@ -11,6 +11,7 @@ def petName_exists(form, field):
         raise ValidationError('That name is already in use by another pet.')
 
 class PetForm(FlaskForm):
+    ownerId = IntegerField('ownerId')
     petTypeId = IntegerField('petTypeId', validators=[DataRequired()])
     name = StringField('name', validators=[DataRequired(), petName_exists])
     hunger = DecimalField('hunger', validators=[NumberRange(min=0, max=100)])
